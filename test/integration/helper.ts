@@ -8,38 +8,38 @@ const DIST_MAIN_JS = 'dist/main.js';
  * manipulating the terrain and game state.
  */
 class IntegrationTestHelper {
-  private _server;
-  private _player;
+  private SERVER;
+  private PLAYER;
 
   get server() {
-    return this._server;
+    return this.SERVER;
   }
 
   get player() {
-    return this._player;
+    return this.PLAYER;
   }
 
-  async beforeEach() {
-    this._server = new ScreepsServer();
+  public async beforeEach() {
+    this.SERVER = new ScreepsServer();
 
     // reset world but add invaders and source keepers bots
-    await this._server.world.reset();
+    await this.SERVER.world.reset();
 
     // create a stub world composed of 9 rooms with sources and controller
-    await this._server.world.stubWorld();
+    await this.SERVER.world.stubWorld();
 
     // add a player with the built dist/main.js file
     const modules = {
         main: readFileSync(DIST_MAIN_JS).toString(),
     };
-    this._player = await this._server.world.addBot({ username: 'player', room: 'W0N1', x: 15, y: 15, modules });
+    this.PLAYER = await this.SERVER.world.addBot({ username: 'player', room: 'W0N1', x: 15, y: 15, modules });
 
     // Start server
-    await this._server.start();
+    await this.SERVER.start();
   }
 
-  async afterEach() {
-    await this._server.stop();
+  public async afterEach() {
+    await this.SERVER.stop();
   }
 }
 
@@ -57,6 +57,6 @@ before(() => {
 
 after(() => {
   process.exit();
-})
+});
 
 export const helper = new IntegrationTestHelper();
