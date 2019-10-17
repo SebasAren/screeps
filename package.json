@@ -1,15 +1,37 @@
 {
-  "scripts": {
-    "build": "rollup --config"
+  "name": "flewtje-screeps",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SebasAren/screeps"
   },
-  "dependencies": {
+  "author": "Sebastiaan Arendsen",
+  "license": "MIT",
+  "scripts": {
+    "lint": "tslint -p tsconfig.json \"src/**/*.ts\"",
+    "build": "rollup -c",
+    "push-main": "rollup -c --environment DEST:main",
+    "push-sim": "rollup -c --environment DEST:sim",
+    "test": "npm run test-unit && npm run test-integration",
+    "test-unit": "rollup -c rollup.test-unit-config.js && mocha dist/test-unit.bundle.js",
+    "test-integration": "npm run build && rollup -c rollup.test-integration-config.js && mocha dist/test-integration.bundle.js",
+    "watch-main": "rollup -cw --environment DEST:main",
+    "watch-pserver": "rollup -cw --environment DEST:pserver",
+    "watch-sim": "rollup -cw --environment DEST:sim"
+  },
+  "devDependencies": {
     "@types/screeps": "^2.5.5",
+    "dotenv": "^8.2.0",
     "rollup": "^1.24.0",
     "rollup-plugin-clear": "^2.0.7",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-screeps": "^0.1.2",
     "rollup-plugin-typescript2": "^0.24.3",
-    "source-map": "^0.7.3",
     "tslib": "^1.10.0",
+    "tslint": "^5.20.0",
     "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "source-map": "^0.7.3"
   }
 }
