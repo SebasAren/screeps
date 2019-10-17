@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "build": "rollup --config"
+  },
   "dependencies": {
     "@types/screeps": "^2.5.5",
     "rollup": "^1.24.0",
