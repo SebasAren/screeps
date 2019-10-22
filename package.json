@@ -6,7 +6,7 @@
     "url": "git+https://github.com/SebasAren/screeps"
   },
   "author": "Sebastiaan Arendsen",
-  "license": "MIT",
+  "license": "GPL",
   "scripts": {
     "lint": "tslint -p tsconfig.json \"src/**/*.ts\"",
     "build": "rollup -c",
